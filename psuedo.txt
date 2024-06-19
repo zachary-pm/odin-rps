@@ -7,14 +7,10 @@ Get Computer Choice Function
 Get Human Choice Function
     PROMPT for input with message: "Please input Rock, Paper, or Scissors
     CONVERT input to all caps
-    IF input does not equal ROCK, PAPER, or SCISSORS 
-        ALERT MESSAGE: "You must input Rock, Paper, or Scissors"
-        CALL Human Choice Function
     RETURN input
 
 Play Round Function
     Human Choice and Computer Choice variables are passed into Function
-    PRINT Human and Computer Choices
     IF Player Choice is ROCK
         IF Computer Choice is ROCK: TIE
         IF Computer Choice is PAPER: LOSE
@@ -27,7 +23,10 @@ Play Round Function
         IF Computer Choice is ROCK: LOSE
         IF Computer Choice is PAPER: WIN
         IF Computer Choice is SCISSORS: TIE
-    PRINT outcome
+    ELSE
+        RETURN
+
+    PRINT Human and Computer Choices and outcome
     RETURN outcome
 
 Play Game Function
@@ -46,4 +45,7 @@ Play Game Function
             PRINT "Game Over! You Lose!"
         IF Win Count == Loss Count
             PRINT "Game Over! Its a Tie!"
+    ELSE
+        CALL Play Round Function with Human Choice and Computer Choice passed as parameters
+
     
