@@ -1,0 +1,49 @@
+Get Computer Choice Function
+    GENERATE random number 0-2
+    IF 0 RETURN "ROCK"
+    IF 1 RETURN "PAPER"
+    IF 2 RETURN "SCISSORS"
+
+Get Human Choice Function
+    PROMPT for input with message: "Please input Rock, Paper, or Scissors
+    CONVERT input to all caps
+    IF input does not equal ROCK, PAPER, or SCISSORS 
+        ALERT MESSAGE: "You must input Rock, Paper, or Scissors"
+        CALL Human Choice Function
+    RETURN input
+
+Play Round Function
+    Human Choice and Computer Choice variables are passed into Function
+    PRINT Human and Computer Choices
+    IF Player Choice is ROCK
+        IF Computer Choice is ROCK: TIE
+        IF Computer Choice is PAPER: LOSE
+        IF Computer Choice is SCISSORS: WIN
+    IF Player Choice is PAPER
+        IF Computer Choice is ROCK: WIN
+        IF Computer Choice is PAPER: TIE
+        IF Computer Choice is SCISSORS: LOSE
+    IF Player Choice is SCISSORS
+        IF Computer Choice is ROCK: LOSE
+        IF Computer Choice is PAPER: WIN
+        IF Computer Choice is SCISSORS: TIE
+    PRINT outcome
+    RETURN outcome
+
+Play Game Function
+    CALL Play Round Function with Human Choice and Computer Choice passed as parameters
+    IF Play Round outcome is WIN
+        INCREMENT Win Count
+    IF Play Round outcome is LOSE
+        INCREMENT Loss Count
+    IF Play Round outcome is TIE
+        INCREMENT Tie Count
+    PRINT Score
+    IF Win Count + Loss Count + Tie Count is 5
+        IF Win Count is greater than Loss Count
+            PRINT "Game Over! You Win!"
+        IF Win Count is less than Loss Count
+            PRINT "Game Over! You Lose!"
+        IF Win Count == Loss Count
+            PRINT "Game Over! Its a Tie!"
+    
