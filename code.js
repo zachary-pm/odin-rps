@@ -1,6 +1,7 @@
 let winCount = 0;
 let lossCount = 0;
 let tieCount = 0;
+playGame();
 
 function computerChoice() {
     let rand = Math.floor(Math.random() * 3);
@@ -38,3 +39,15 @@ function playRound (humanChoice, computerChoice) {
     return outcome;
 }
 
+function playGame() {
+    let roundOutcome = playRound(humanChoice(), computerChoice());
+    if (roundOutcome == "YOU WIN") {winCount++;}
+    if (roundOutcome == "YOU LOSE") {lossCount++;}
+    if (roundOutcome == "IT'S A TIE") {tieCount++;}
+    console.log(`Wins: ${winCount}, Losses: ${lossCount}, Ties: ${tieCount}`);
+    if (winCount + lossCount + tieCount == 5) {
+        if (winCount > lossCount) {console.log("Game Over! You Win!");}
+        if (winCount < lossCount) {console.log("Game Over! You Lost!");}
+        if (winCount == lossCount) {console.log("Game Over! It's a Tie!");}
+    } else {playGame();}
+}
