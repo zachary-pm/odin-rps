@@ -1,7 +1,33 @@
 let winCount = 0;
 let lossCount = 0;
 let tieCount = 0;
-playGame();
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const player = document.querySelector("#player");
+const cpu = document.querySelector("#cpu");
+const result = document.querySelector("#result");
+const playerScore = document.querySelector("#playerScore")
+const cpuScore = document.querySelector("#cpuScore")
+const ties = document.querySelector("#ties")
+const gameOver = document.querySelector("#gameOver")
+
+
+rock.addEventListener("click", () =>{
+    playRound("ROCK", computerChoice())
+});
+
+paper.addEventListener("click", () =>{
+    playRound("PAPER", computerChoice())
+});
+
+scissors.addEventListener("click", () =>{
+    playRound("SCISSORS", computerChoice())
+});
+
+
+
 
 function computerChoice() {
     let rand = Math.floor(Math.random() * 3);
@@ -10,11 +36,6 @@ function computerChoice() {
     if (rand == 2) {return "SCISSORS";}
 }
 
-function humanChoice() {
-    let choice = prompt("Enter Rock, Paper, or Scissors");
-    choice = choice.toUpperCase();
-    return choice;
-}
 
 function playRound (humanChoice, computerChoice) {
     let outcome;
@@ -34,20 +55,32 @@ function playRound (humanChoice, computerChoice) {
         return;
     }
     console.log(`You chose ${humanChoice}.`);
+    player.textContent = `You Chose: ${humanChoice}`;
     console.log(`The Computer chose ${computerChoice}.`);
-    console.log(`${outcome}!`)    
-    return outcome;
+    cpu.textContent = `The Machine Chose ${computerChoice}`;
+    console.log(`${outcome}!`)
+    result.textContent = `${outcome}!`    
+    keepScore(outcome);
 }
 
-function playGame() {
-    let roundOutcome = playRound(humanChoice(), computerChoice());
-    if (roundOutcome == "YOU WIN") {winCount++;}
-    if (roundOutcome == "YOU LOSE") {lossCount++;}
-    if (roundOutcome == "IT'S A TIE") {tieCount++;}
-    console.log(`Wins: ${winCount}, Losses: ${lossCount}, Ties: ${tieCount}`);
-    if (winCount + lossCount + tieCount == 5) {
-        if (winCount > lossCount) {console.log("Game Over! You Win!");}
-        if (winCount < lossCount) {console.log("Game Over! You Lost!");}
-        if (winCount == lossCount) {console.log("Game Over! It's a Tie!");}
-    } else {playGame();}
+function keepScore(outcome) {
+    if (outcome == "YOU WIN") {
+        winCount++;
+        playerScore.textContent = `Your Score: ${winCount}`;
+    } else if (outcome == "YOU LOSE") {
+        lossCount++;
+        cpuScore.textContent = `The Machine's Score: ${lossCount}`;
+    } else {
+        tieCount++;
+        ties.textContent = `Ties: ${tieCount}`;
+    }
+    if (lossCount == 5 || winCount == 5) {endGame();}
+}
+
+function endGame() {
+    if (winCount == 5) {
+        gameOver.textContent = "You Win!"
+    } else {
+        gameOver.textContent = "The Machine is Victorious!"
+    }
 }
