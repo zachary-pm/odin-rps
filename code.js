@@ -8,10 +8,11 @@ const scissors = document.querySelector("#scissors");
 const player = document.querySelector("#player");
 const cpu = document.querySelector("#cpu");
 const result = document.querySelector("#result");
-const playerScore = document.querySelector("#playerScore")
-const cpuScore = document.querySelector("#cpuScore")
-const ties = document.querySelector("#ties")
-const gameOver = document.querySelector("#gameOver")
+const playerScore = document.querySelector("#playerScore");
+const cpuScore = document.querySelector("#cpuScore");
+const ties = document.querySelector("#ties");
+const gameOver = document.querySelector("#gameOver");
+const body = document.querySelector("body");
 
 
 rock.addEventListener("click", () =>{
@@ -57,7 +58,7 @@ function playRound (humanChoice, computerChoice) {
     console.log(`You chose ${humanChoice}.`);
     player.textContent = `You Chose: ${humanChoice}`;
     console.log(`The Computer chose ${computerChoice}.`);
-    cpu.textContent = `The Machine Chose ${computerChoice}`;
+    cpu.textContent = `The Machine Chose: ${computerChoice}`;
     console.log(`${outcome}!`)
     result.textContent = `${outcome}!`    
     keepScore(outcome);
@@ -83,4 +84,31 @@ function endGame() {
     } else {
         gameOver.textContent = "The Machine is Victorious!"
     }
+    const playAgain = document.createElement("button");
+    playAgain.setAttribute("class", "playAgain");
+    playAgain.textContent = "Play Again";
+    body.appendChild(playAgain);
+    body.removeChild(rock);
+    body.removeChild(paper);
+    body.removeChild(scissors);
+
+    
+
+    playAgain.addEventListener("click", () => {
+        winCount=0;
+        lossCount=0;
+        tieCount=0;
+        playerScore.textContent = `Your Score: ${winCount}`;
+        cpuScore.textContent = `The Machine's Score: ${lossCount}`;
+        ties.textContent = `Ties: ${tieCount}`;
+        player.textContent = `You Chose: `;
+        cpu.textContent = `The Machine Chose: `;
+        result.textContent = ``;    
+        body.insertBefore(rock, player);
+        body.insertBefore(paper, player);
+        body.insertBefore(scissors, player);
+        body.removeChild(playAgain);
+        gameOver.textContent = "";
+    })
+
 }
